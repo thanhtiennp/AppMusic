@@ -1,4 +1,4 @@
-package com.example.soc_macmini_15.musicplayer.Fragments;
+package com.example.thanhtien.musicplayer.Fragments;
 
 
 import android.content.ContentResolver;
@@ -20,10 +20,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.soc_macmini_15.musicplayer.Adapter.SongAdapter;
-import com.example.soc_macmini_15.musicplayer.DB.FavoritesOperations;
-import com.example.soc_macmini_15.musicplayer.Model.SongsList;
-import com.example.soc_macmini_15.musicplayer.R;
+import com.example.thanhtien.musicplayer.Adapter.SongAdapter;
+import com.example.thanhtien.musicplayer.DB.FavoritesOperations;
+import com.example.thanhtien.musicplayer.Model.SongsList;
+import com.example.thanhtien.musicplayer.R;
 
 import java.util.ArrayList;
 

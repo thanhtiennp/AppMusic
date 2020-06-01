@@ -1,4 +1,4 @@
-package com.example.soc_macmini_15.musicplayer.Activity;
+package com.example.thanhtien.musicplayer.Activity;
 
 import android.Manifest;
 import android.app.SearchManager;
@@ -26,28 +26,32 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.soc_macmini_15.musicplayer.Adapter.ViewPagerAdapter;
-import com.example.soc_macmini_15.musicplayer.DB.FavoritesOperations;
-import com.example.soc_macmini_15.musicplayer.Fragments.AllSongFragment;
-import com.example.soc_macmini_15.musicplayer.Fragments.CurrentSongFragment;
-import com.example.soc_macmini_15.musicplayer.Fragments.FavSongFragment;
-import com.example.soc_macmini_15.musicplayer.Model.SongsList;
-import com.example.soc_macmini_15.musicplayer.R;
+import com.example.thanhtien.musicplayer.Adapter.ViewPagerAdapter;
+import com.example.thanhtien.musicplayer.DB.FavoritesOperations;
+import com.example.thanhtien.musicplayer.Fragments.AllSongFragment;
+import com.example.thanhtien.musicplayer.Fragments.CurrentSongFragment;
+import com.example.thanhtien.musicplayer.Fragments.FavSongFragment;
+import com.example.thanhtien.musicplayer.Model.SongsList;
+import com.example.thanhtien.musicplayer.R;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AllSongFragment.createDataParse, FavSongFragment.createDataParsed, CurrentSongFragment.createDataParsed {
 
     private Menu menu;
-
+    Animation animation;
     private ImageButton imgBtnPlayPause, imgbtnReplay, imgBtnPrev, imgBtnNext, imgBtnSetting;
     private TabLayout tabLayout;
+    ImageView img;
     private ViewPager viewPager;
     private SeekBar seekbarController;
     private DrawerLayout mDrawerLayout;
@@ -74,6 +78,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         init();
         grantedPermission();
+        animation = AnimationUtils.loadAnimation(this, R.anim.disc);
+
 
     }
 
@@ -86,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imgBtnNext = findViewById(R.id.img_btn_next);
         imgbtnReplay = findViewById(R.id.img_btn_replay);
         imgBtnSetting = findViewById(R.id.img_btn_setting);
-
+        img =findViewById(R.id.image_route);
         tvCurrentTime = findViewById(R.id.tv_current_time);
         tvTotalTime = findViewById(R.id.tv_total_time);
         FloatingActionButton refreshSongs = findViewById(R.id.btn_refresh);
@@ -312,8 +318,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.img_btn_play:
                 if (checkFlag) {
+
                     if (mediaPlayer.isPlaying()) {
                         mediaPlayer.pause();
+                       // img.startAnimation(animation);
                         imgBtnPlayPause.setImageResource(R.drawable.play_icon);
                     } else if (!mediaPlayer.isPlaying()) {
                         mediaPlayer.start();
@@ -321,21 +329,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         playCycle();
                     }
                 } else {
-                    Toast.makeText(this, "Select the Song ..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Chọn Bài Hát..", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.btn_refresh:
-                Toast.makeText(this, "Refreshing", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Cập Nhật", Toast.LENGTH_SHORT).show();
                 setPagerLayout();
                 break;
             case R.id.img_btn_replay:
 
                 if (repeatFlag) {
-                    Toast.makeText(this, "Replaying Removed..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Thoát ..", Toast.LENGTH_SHORT).show();
                     mediaPlayer.setLooping(false);
                     repeatFlag = false;
                 } else {
-                    Toast.makeText(this, "Replaying Added..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Thêm Chơi Lại..", Toast.LENGTH_SHORT).show();
                     mediaPlayer.setLooping(true);
                     repeatFlag = true;
                 }
@@ -371,10 +379,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.img_btn_setting:
                 if (!playContinueFlag) {
                     playContinueFlag = true;
-                    Toast.makeText(this, "Loop Added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "vòng Lặp", Toast.LENGTH_SHORT).show();
                 } else {
                     playContinueFlag = false;
-                    Toast.makeText(this, "Loop Removed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Thoát Vòng Lặp", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
